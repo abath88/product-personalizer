@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import styles from './Product.module.scss';
 import PropTypes from 'prop-types';
 
@@ -9,9 +9,9 @@ const Product = props => {
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0]);
 
-  const getPrice = () => {
+  const getPrice = useMemo(() => {
     return props.basePrice + currentSize.additionalPrice;
-  }
+  }, [props.basePrice, currentSize])
 
   const handleSubmit = (e) => {
     e.preventDefault();
